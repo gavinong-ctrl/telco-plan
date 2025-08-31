@@ -20,7 +20,7 @@ export default function PlanCard({ plan, onViewDetails }: PlanCardProps) {
   const badgeColor = typeColors[plan.type] || typeColors.Default;
 
   // Check if this is the Merdeka plan
-  const isMerdekaPlan = plan.name === "Merdeka Freedom Plan";
+  const isMerdekaPlan = plan.name === "Merdeka Freedom";
 
   return (
     <button

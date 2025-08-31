@@ -4,7 +4,7 @@ import type { Plan } from "../types/plan";
 const mockPlans: Plan[] = [
   {
     id: 1,
-    name: "Merdeka Freedom Plan",
+    name: "Merdeka Freedom",
     price: 31,
     validity: "1957 days",
     dataLimit: "Unlimited",
