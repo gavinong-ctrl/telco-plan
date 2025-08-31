@@ -4,6 +4,15 @@ import type { Plan } from "../types/plan";
 const mockPlans: Plan[] = [
   {
     id: 1,
+    name: "Merdeka Freedom Plan",
+    price: 31,
+    validity: "1957 days",
+    dataLimit: "Unlimited",
+    type: "Postpaid",
+    description: "Celebrate Merdeka with unlimited data for only RM31/month! Enjoy validity of 1957 days. Limited to the first 8 customers — act fast to grab this exclusive deal!"
+  },
+  {
+    id: 2,
     name: "Prepaid Lite",
     price: 10,
     validity: "7 days",
@@ -12,7 +21,7 @@ const mockPlans: Plan[] = [
     description: "Affordable plan with short validity, perfect for light users."
   },
   {
-    id: 2,
+    id: 3,
     name: "Prepaid Plus",
     price: 30,
     validity: "30 days",
@@ -21,7 +30,7 @@ const mockPlans: Plan[] = [
     description: "Great for regular users with more data needs."
   },
   {
-    id: 3,
+    id: 4,
     name: "Postpaid Basic",
     price: 50,
     validity: "30 days",
@@ -30,7 +39,7 @@ const mockPlans: Plan[] = [
     description: "Unlimited calls + generous data allowance."
   },
   {
-    id: 4,
+    id: 5,
     name: "Postpaid Premium",
     price: 80,
     validity: "30 days",

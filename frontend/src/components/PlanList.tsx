@@ -1,5 +1,5 @@
 import type { Plan } from "../types/plan";
-import PlanCard from "./PlanCard";
+import PlanCard from "./PlanCard/PlanCard";
 
 interface PlanListProps {
   plans: Plan[];
@@ -7,11 +7,17 @@ interface PlanListProps {
 }
 
 export default function PlanList({ plans, onViewDetails }: PlanListProps) {
+  // example: sort so "prepared" comes before "postpaid"
+  const sortedPlans = [...plans].sort((a, b) => {
+    if (a.type === b.type) return 0;
+    return a.type === "Postpaid" ? -1 : 1;
+  });
+
   return (
     <div className="flex flex-wrap justify-start gap-4">
-      {plans.map((plan) => (
+      {sortedPlans.map((plan) => (
         <div
-          key={plan.id} 
+          key={plan.id}
           className="w-full sm:w-[250px] md:w-[300px]"
         >
           <PlanCard plan={plan} onViewDetails={onViewDetails} />
@@ -20,3 +26,4 @@ export default function PlanList({ plans, onViewDetails }: PlanListProps) {
     </div>
   );
 }
+
