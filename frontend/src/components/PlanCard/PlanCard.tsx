@@ -1,3 +1,4 @@
+import twemoji from "twemoji";
 import type { Plan } from "../../types/plan";
 import "./PlanCard.css";
 
@@ -34,7 +35,17 @@ export default function PlanCard({ plan, onViewDetails }: PlanCardProps) {
       {/* Header */}
       <div className="flex flex-col gap-2 text-left">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-800">{plan.name}</h3>
+          <h3 className="text-base sm:text-lg md:text-lg font-semibold text-gray-800 flex items-center gap-1">
+            {isMerdekaPlan && (
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: twemoji.parse("🇲🇾", { folder: "svg", ext: ".svg" }),
+                }}
+                className="w-4 h-4 inline-block"
+              />
+            )}
+            {plan.name}
+          </h3>
           <span
             className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium leading-tight ${badgeColor}`}
           >

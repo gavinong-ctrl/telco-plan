@@ -18,7 +18,7 @@ export default function PlanList({ plans, onViewDetails }: PlanListProps) {
       {sortedPlans.map((plan) => (
         <div
           key={plan.id}
-          className="w-full sm:w-[250px] md:w-[300px]"
+          className="w-full sm:w-[250px] md:w-[300px] lg:w-[320px]"
         >
           <PlanCard plan={plan} onViewDetails={onViewDetails} />
         </div>
