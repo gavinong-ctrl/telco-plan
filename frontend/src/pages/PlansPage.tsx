@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import type { Plan, PlanType } from "../types/plan";
+import type { Plan } from "../types/plan";
 import PlanFilter from "../components/PlanFilter";
 import Loader from "../components/loader";
 import PlanList from "../components/PlanList";
