@@ -6,11 +6,12 @@ This project includes a **Java backend** and a **React frontend**.
 ---
 
 ## 📂 Project Structure
-telco-plan/
-├── backend/ # Java backend (Maven project)
-├── frontend/ # React frontend (Vite)
 
----
+```text
+telco-plan/
+├── backend/   # Java backend (Maven project)
+├── frontend/  # React frontend (Vite)
+```
 
 ## 🚀 Getting Started
 
