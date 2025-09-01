@@ -1,5 +1,7 @@
 package com.singtel.telco_plan.service;
 
+import com.singtel.telco_plan.dto.PlanDetailDTO;
+import com.singtel.telco_plan.dto.PlanSummaryDTO;
 import com.singtel.telco_plan.model.Plan;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PlanService {
@@ -24,14 +27,29 @@ public class PlanService {
                     "For heavy users who want maximum benefits.")
     );
 
-
-
-    public List<Plan> getAllPlans() {
-        return mockPlans;
+    public List<PlanSummaryDTO> getAllPlans() {
+        return mockPlans.stream()
+                .map(plan -> new PlanSummaryDTO(
+                        plan.getId(),
+                        plan.getName(),
+                        plan.getPrice(),
+                        plan.getValidity(),
+                        plan.getType()))
+                .collect(Collectors.toList());
     }
 
-    public Optional<Plan> getPlanById(int id) {
-        return mockPlans.stream().filter(plan -> plan.getId() == id).findFirst();
+    public Optional<PlanDetailDTO> getPlanById(int id) {
+        return mockPlans.stream()
+                .filter(plan -> plan.getId() == id)
+                .map(plan -> new PlanDetailDTO(
+                        plan.getId(),
+                        plan.getName(),
+                        plan.getPrice(),
+                        plan.getValidity(),
+                        plan.getDataLimit(),
+                        plan.getType(),
+                        plan.getDescription()))
+                .findFirst();
     }
 }
 

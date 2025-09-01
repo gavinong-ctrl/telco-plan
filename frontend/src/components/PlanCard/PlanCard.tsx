@@ -12,9 +12,6 @@ export default function PlanCard({ plan, onViewDetails }: PlanCardProps) {
   const typeColors: Record<string, string> = {
     Prepaid: "bg-blue-100 text-blue-700",
     Postpaid: "bg-green-100 text-green-700",
-    // Family: "bg-purple-100 text-purple-700",
-    // Business: "bg-yellow-100 text-yellow-700",
-    // Default: "bg-gray-100 text-gray-700",
   };
 
   const badgeColor = typeColors[plan.type] || typeColors.Default;

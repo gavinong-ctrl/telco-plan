@@ -2,7 +2,7 @@ import type { Plan } from "../types/plan";
 
 // Fetch all plans from Spring Boot backend
 export async function fetchPlans(): Promise<Plan[]> {
-  const response = await fetch("http://localhost:8080/plans");
+  const response = await fetch("api/plans");
   if (!response.ok) {
     throw new Error("Failed to fetch plans");
   }
@@ -11,7 +11,7 @@ export async function fetchPlans(): Promise<Plan[]> {
 
 // Fetch a specific plan by ID
 export async function fetchPlanById(id: number): Promise<Plan> {
-  const response = await fetch(`http://localhost:8080/plans/${id}`);
+  const response = await fetch(`api/plans/${id}`);
   if (!response.ok) {
     throw new Error("Plan not found");
   }

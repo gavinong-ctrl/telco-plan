@@ -1,39 +1,55 @@
-import { useEffect, useState } from "react";
-import type { Plan } from "../types/plan";
+import { useEffect, useState, useMemo } from "react";
+import type { Plan, PlanType } from "../types/plan";
 import PlanFilter from "../components/PlanFilter";
 import Loader from "../components/loader";
 import PlanList from "../components/PlanList";
 import PlanDetailsModal from "../components/PlanDetailsModal";
-import { fetchPlans } from "../api/planService";
+import { fetchPlanById, fetchPlans } from "../api/planService";
 
 export default function PlansPage() {
   const [plans, setPlans] = useState<Plan[]>([]);
-  const [filteredPlans, setFilteredPlans] = useState<Plan[]>([]);
-  const [selectedType, setSelectedType] = useState("All");
+  const [selectedType, setSelectedType] = useState<string>("All");
   const [loading, setLoading] = useState(true);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    async function loadData() {
-      setLoading(true);
-      const data = await fetchPlans();
-      setPlans(data);
-      setFilteredPlans(data);
-      setLoading(false);
-    }
     loadData();
   }, []);
 
-  const handleFilterChange = (type: string) => {
-    setSelectedType(type);
-    if (type === "All") setFilteredPlans(plans);
-    else setFilteredPlans(plans.filter((p) => p.type === type));
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      const data = await fetchPlans();
+      setPlans(data);
+    } catch (error) {
+      console.error("Failed to fetch plans:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleViewDetails = (plan: Plan) => {
-    setSelectedPlan(plan);
-    setIsModalOpen(true);
+  const filteredPlans = useMemo(() => {
+    return selectedType === "All"
+      ? plans
+      : plans.filter((p) => p.type === selectedType);
+  }, [plans, selectedType]);
+
+  const handleFilterChange = (type: string) => {
+    setSelectedType(type);
+  };
+
+ const handleViewDetails = async (plan: Plan) => {
+    try {
+      const fullPlan = await fetchPlanById(plan.id);
+      setSelectedPlan(fullPlan);
+    } catch (error) {
+      console.error("Failed to fetch plan details:", error);
+    }
+  };
+
+
+  const handleCloseModal = () => {
+    setSelectedPlan(null);
   };
 
   return (
@@ -41,7 +57,12 @@ export default function PlansPage() {
       <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 tracking-wide mb-6 text-left">
         Available Plans
       </h1>
-      <PlanFilter selectedType={selectedType} onFilterChange={handleFilterChange} className="mb-6" />
+
+      <PlanFilter
+        selectedType={selectedType}
+        onFilterChange={handleFilterChange}
+        className="mb-6"
+      />
 
       {loading ? (
         <Loader />
@@ -49,11 +70,13 @@ export default function PlansPage() {
         <PlanList plans={filteredPlans} onViewDetails={handleViewDetails} />
       )}
 
-      <PlanDetailsModal
-        plan={selectedPlan}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      {selectedPlan && (
+        <PlanDetailsModal
+          plan={selectedPlan}
+          isOpen={!!selectedPlan}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 }
