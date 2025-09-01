@@ -3,6 +3,9 @@
 A full-stack application for managing and displaying telco plans.  
 This project includes a **Java backend** and a **React frontend**.
 
+
+![Demo](telco-plan-demo.mp4)
+
 ---
 
 ## 📂 Project Structure
