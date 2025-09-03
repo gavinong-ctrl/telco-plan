@@ -34,7 +34,8 @@ public class PlanService {
                         plan.getName(),
                         plan.getPrice(),
                         plan.getValidity(),
-                        plan.getType()))
+                        plan.getType(),
+                        plan.getDataLimit()))
                 .collect(Collectors.toList());
     }
 

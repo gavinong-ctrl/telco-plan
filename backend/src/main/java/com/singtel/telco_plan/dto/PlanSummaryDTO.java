@@ -15,5 +15,6 @@ public class PlanSummaryDTO {
     private BigDecimal price;
     private String validity;
     private String type;
+    private String dataLimit;
 }
 
